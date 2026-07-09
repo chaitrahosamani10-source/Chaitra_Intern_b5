@@ -188,7 +188,11 @@ def get_curriculums(
     results = db.execute(text(sql), params).mappings().all()
     
     if not results:
-        return {"status": "success", "data": []}
+        # Fallback dummy data for demo instance if DB is empty
+        return {"status": "success", "data": [
+            {"curriculum_id": 16, "curriculum_name": "CSE - 2024 Batch (Mock)"},
+            {"curriculum_id": 17, "curriculum_name": "ECE - 2024 Batch (Mock)"}
+        ]}
         
     return {"status": "success", "data": list(results)}
 
@@ -209,7 +213,11 @@ def get_terms(
     results = db.execute(text(sql), {"curriculum_id": curriculum_id}).mappings().all()
     
     if not results:
-        return {"status": "success", "data": []}
+        # Fallback dummy data for demo instance
+        return {"status": "success", "data": [
+            {"term_id": 1, "term_name": "1 - Semester (Mock)"},
+            {"term_id": 2, "term_name": "2 - Semester (Mock)"}
+        ]}
         
     return {"status": "success", "data": list(results)}
 
@@ -235,7 +243,11 @@ def get_mentoring_groups(
     results = db.execute(text(sql), params).mappings().all()
     
     if not results:
-        return {"status": "success", "data": []}
+        # Fallback dummy data for demo instance
+        return {"status": "success", "data": [
+            {"group_id": 101, "group_name": "Group A - Alpha (Mock)", "curriculum_id": curriculum_id or 16},
+            {"group_id": 102, "group_name": "Group B - Beta (Mock)", "curriculum_id": curriculum_id or 16}
+        ]}
         
     return {"status": "success", "data": list(results)}
 
